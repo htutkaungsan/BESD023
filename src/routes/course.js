@@ -35,12 +35,12 @@ function normalizeCourse(body) {
 
 function validateCourse(course) {
   const errors = [];
-  if (!course.title || course.title.length > 100) errors.push('title is required and must not exceed 100 characters');
-  if (!course.description || course.description.length > 200) errors.push('description is required and must not exceed 200 characters');
-  if (!Number.isInteger(course.duration) || course.duration <= 0) errors.push('duration must be a positive integer');
-  if (!course.lecturer || course.lecturer.length > 100) errors.push('lecturer is required and must not exceed 100 characters');
-  if (!categories.has(course.category)) errors.push('category must be Basic, Graphics, Coding, or Other');
-  if (!course.courseImage || course.courseImage.length > 20) errors.push('courseImage is required and must not exceed 20 characters');
+  if (!course.title || course.title.length > 100) errors.push('double check title');
+  if (!course.description || course.description.length > 200) errors.push('double check description');
+  if (!Number.isInteger(course.duration) || course.duration <= 0) errors.push('double check duration');
+  if (!course.lecturer || course.lecturer.length > 100) errors.push('double check lecturer');
+  if (!categories.has(course.category)) errors.push('double check category -> Basic, Graphics, Coding, or Other');
+  if (!course.courseImage || course.courseImage.length > 20) errors.push('double check courseImage name/url');
   return errors;
 }
 
@@ -56,7 +56,7 @@ router.get('/list', async (req, res, next) => {
 router.get('/search/id', async (req, res, next) => {
   const courseId = readCourseId(req.query);
   if (!Number.isInteger(courseId) || courseId <= 0) {
-    return res.status(400).json({ message: 'A positive courseId query parameter is required' });
+    return res.status(400).json({ message: 'courseId must be a positive number' });
   }
 
   try {
@@ -125,7 +125,7 @@ router.put('/update', async (req, res, next) => {
 router.delete('/delete', async (req, res, next) => {
   const courseId = readCourseId({ ...req.query, ...req.body });
   if (!Number.isInteger(courseId) || courseId <= 0) {
-    return res.status(400).json({ result: 0, message: 'A positive courseId is required' });
+    return res.status(400).json({ result: 0, message: 'courseId must be a positive number' });
   }
 
   try {
