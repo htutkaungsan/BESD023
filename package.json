@@ -1,0 +1,19 @@
+{
+  "name": "besd023",
+  "version": "1.0.0",
+  "description": "Back-end API for managing Software Engineering short courses",
+  "main": "src/app.js",
+  "scripts": {
+    "start": "node src/app.js",
+    "dev": "node --watch src/app.js",
+    "test": "node --test"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "dependencies": {
+    "dotenv": "^16.6.1",
+    "express": "^5.1.0",
+    "mysql2": "^3.14.4"
+  }
+}
